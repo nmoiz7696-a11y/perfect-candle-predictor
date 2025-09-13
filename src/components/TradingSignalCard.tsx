@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Clock } from "lucide-react";
+import { TrendingUp, TrendingDown, Clock, ArrowUp, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface TradingSignalCardProps {
@@ -37,15 +37,29 @@ export const TradingSignalCard = ({
           )} />
           <h3 className="font-bold text-lg">{pair}</h3>
         </div>
-        <Badge 
-          variant="secondary" 
-          className={cn(
-            "font-bold",
-            isBullish ? "bg-gradient-bullish text-bullish-foreground" : "bg-gradient-bearish text-bearish-foreground"
-          )}
-        >
-          {signal}
-        </Badge>
+        <div className="flex items-center gap-2">
+          <div className={cn(
+            "w-12 h-12 rounded-full flex items-center justify-center relative",
+            isBullish 
+              ? "bg-gradient-to-br from-bullish/20 to-bullish/10 border-2 border-bullish/30" 
+              : "bg-gradient-to-br from-bearish/20 to-bearish/10 border-2 border-bearish/30"
+          )}>
+            {isBullish ? (
+              <ArrowUp className="w-6 h-6 text-bullish font-bold animate-bounce" />
+            ) : (
+              <ArrowDown className="w-6 h-6 text-bearish font-bold animate-bounce" />
+            )}
+          </div>
+          <Badge 
+            variant="secondary" 
+            className={cn(
+              "font-bold text-sm px-3 py-1",
+              isBullish ? "bg-gradient-bullish text-bullish-foreground" : "bg-gradient-bearish text-bearish-foreground"
+            )}
+          >
+            {signal}
+          </Badge>
+        </div>
       </div>
       
       <div className="space-y-3">
